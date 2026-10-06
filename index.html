@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catálogo Encontro Imigrantes</title>
+<style>
+:root{--bg:#f6f5f2;--card:#fff;--ink:#1c1c1a;--mut:#6b6a66;--line:#e4e2dc;--acc:#2f5d8a;--mine:#c2410c;--mineBg:#fff4ec;--up:#b42318;--dn:#1f7a4d;--bar:#cfd9e4}
+@media (prefers-color-scheme:dark){:root{--bg:#141413;--card:#1e1e1c;--ink:#eceae4;--mut:#9c9a93;--line:#33322f;--acc:#7fb0de;--mine:#fb923c;--mineBg:#2a1d14;--up:#f97066;--dn:#4ade80;--bar:#2e3d4d}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 16px 60px}
+h1{font-size:26px;margin:0 0 4px}.sub{color:var(--mut);margin:0 0 22px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:18px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.kpi small{color:var(--mut);display:block;font-size:12px}.kpi b{font-size:20px}
+.kpi.m{border-color:var(--mine);background:var(--mineBg)}
+.note{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--mine);border-radius:10px;padding:14px 16px;margin-bottom:22px}
+.note h2{font-size:16px;margin:0 0 6px}.note p{margin:6px 0}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.filters button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;font-size:13px}
+.filters button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.card.mine{border:2px solid var(--mine);box-shadow:0 0 0 4px color-mix(in srgb,var(--mine) 18%,transparent)}
+.rank{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.7);color:#fff;font-weight:700;border-radius:8px;padding:2px 9px;z-index:2;font-size:13px}
+.tag{position:absolute;top:8px;right:8px;background:var(--mine);color:#fff;font-weight:700;border-radius:8px;padding:3px 9px;z-index:2;font-size:12px}
+.gal{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:2px;height:210px;background:var(--line)}
+.gal img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;display:block;min-height:0}
+.gal img:first-child{grid-row:1/4}
+.body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.price{font-size:22px;font-weight:700}.ppm{font-weight:600;color:var(--acc)}
+.diff{font-size:12px;font-weight:600;margin-left:6px}.diff.up{color:var(--up)}.diff.dn{color:var(--dn)}
+.bar{height:5px;background:var(--line);border-radius:3px;overflow:hidden}.bar span{display:block;height:100%;background:var(--acc)}
+.mine .bar span{background:var(--mine)}
+.tit{color:var(--mut);font-size:13px}
+.spec{list-style:none;padding:0;margin:2px 0;display:flex;flex-wrap:wrap;gap:5px}.spec li{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:12.5px}
+.meta{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--mut);flex-wrap:wrap}.meta .old{color:var(--up)}
+.lnk{margin-top:auto;padding-top:6px;color:var(--acc);font-weight:600;text-decoration:none;font-size:13.5px}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:9;cursor:zoom-out}#lb img{max-width:94vw;max-height:90vh;border-radius:8px}
+footer{color:var(--mut);font-size:12px;margin-top:28px}
+@media print{body{background:#fff}.filters{display:none}.card{break-inside:avoid;box-shadow:none}.grid{grid-template-columns:repeat(2,1fr)}.wrap{padding:0}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@page{size:A4;margin:10mm}
+.tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}.tabs button,.sortb button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit;font-weight:600}
+.tabs button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sortb{display:flex;gap:8px;align-items:center;margin-bottom:12px;color:var(--mut);font-size:13px}.sortb button{padding:5px 11px;font-size:13px;font-weight:500}.sortb button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}td:nth-child(12){white-space:normal;min-width:220px}
+th{background:var(--bg);font-size:12px;color:var(--mut);position:sticky;top:0}td.n,th.n{text-align:right}td.up{color:var(--up);font-weight:600}td.dn{color:var(--dn);font-weight:600}
+tr.mine td{background:var(--mineBg);font-weight:700}td a{color:var(--acc);font-weight:600;text-decoration:none}
+#vt{display:none}
+@media print{.tabs,.sortb{display:none}#vc,#vt{display:block!important}#vt{break-after:page}.tw{overflow:visible}table{font-size:9px}th,td{padding:3px 4px}}
+</style></head><body><div class="wrap">
+<h1>Condomínio Encontro Imigrantes — imóveis à venda</h1>
+<p class="sub">Rua Bandeirantes, 239 · Conceição, Diadema · 19 anúncios no QuintoAndar em 06/10/2026, do mais barato ao mais caro</p>
+<div class="kpis">
+<div class="kpi"><small>Mediana R$/m²</small><b>R$ 7.727</b></div>
+<div class="kpi"><small>Média R$/m² (67–69 m², exceto o seu)</small><b>R$ 7.671</b></div>
+<div class="kpi"><small>Faixa de preço</small><b>R$ 399.000 – R$ 685.000</b></div>
+<div class="kpi m"><small>Seu imóvel (67 m², 2 vagas)</small><b>R$ 9.254/m²</b></div>
+</div>
+<div class="note"><h2>Leitura rápida do seu imóvel (R$ 620.000)</h2>
+<p>É o <b>maior R$/m² do condomínio</b>: 20% acima da mediana e cerca de 21% acima da média das unidades de 67–69 m². O anúncio está publicado <b>há 11 meses</b>, o que reforça que o preço está acima do que o mercado está aceitando.</p>
+<p>O comparável mais próximo é o de R$ 588 mil (69 m², 2 vagas, também no 16º–19º andar), que pede R$ 8.522/m² e está anunciado <b>há mais de 1 ano</b>. Ou seja, mesmo esse patamar não está girando.</p>
+<p><b>Conta de referência:</b> 67 m² × ~R$ 7.650/m² ≈ R$ 513 mil (base 1 vaga) + 2ª vaga (~R$ 35–50 mil) + andar alto (~3–5%) ⇒ <b>pedir algo entre R$ 559 e 579 mil</b>, com fechamento provável entre R$ 540 e 560 mil. São estimativas sobre preços pedidos, não sobre vendas fechadas.</p></div>
+<div class="tabs"><button class="on" data-t="vc">Catálogo com fotos</button><button data-t="vt">Resumo em tabela (R$/m²)</button></div>
+<section id="vt"><div class="tw"><table><thead><tr><th>#</th><th class="n">R$/m²</th><th class="n">vs mediana</th><th class="n">Preço</th><th class="n">m²</th><th class="n">Quartos</th><th class="n">Vagas</th><th>Andar</th><th>Mobília</th><th class="n">Cond.+IPTU</th><th>Publicado</th><th>Descrição</th><th>Anúncio</th></tr></thead><tbody>
+<tr class=""><td>1</td><td class="n">R$ 5.524</td><td class="n dn">-29%</td><td class="n"><b>R$ 685.000</b></td><td class="n">124</td><td class="n">3</td><td class="n">1</td><td>3º</td><td>Sem mobília</td><td class="n">R$ 817</td><td>há 4 meses</td><td>124 m² · 3 quartos, 1 suíte (provável garden)</td><td><a href="https://www.quintoandar.com.br/imovel/895434355/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>2</td><td class="n">R$ 6.957</td><td class="n dn">-10%</td><td class="n"><b>R$ 480.000</b></td><td class="n">69</td><td class="n">3</td><td class="n">1</td><td>8º–11º</td><td>Sem mobília</td><td class="n">R$ 540</td><td>há +1 ano</td><td>3 quartos, 1 suíte, varanda</td><td><a href="https://www.quintoandar.com.br/imovel/894314890/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>3</td><td class="n">R$ 7.164</td><td class="n dn">-7%</td><td class="n"><b>R$ 480.000</b></td><td class="n">67</td><td class="n">2</td><td class="n">1</td><td>8º–11º</td><td>Mobiliado</td><td class="n">R$ 455</td><td>há 8 meses</td><td>Mobiliado, aceita pets</td><td><a href="https://www.quintoandar.com.br/imovel/895261964/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>4</td><td class="n">R$ 7.164</td><td class="n dn">-7%</td><td class="n"><b>R$ 480.000</b></td><td class="n">67</td><td class="n">3</td><td class="n">1</td><td>3º</td><td>Sem mobília</td><td class="n">R$ 565</td><td>há 10 dias</td><td>3 quartos, aceita pets</td><td><a href="https://www.quintoandar.com.br/imovel/895742761/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>5</td><td class="n">R$ 7.191</td><td class="n dn">-7%</td><td class="n"><b>R$ 489.000</b></td><td class="n">68</td><td class="n">2</td><td class="n">1</td><td>4º–7º</td><td>Mobiliado</td><td class="n">R$ 580</td><td>há 1 mês</td><td>Mobiliado, com varanda</td><td><a href="https://www.quintoandar.com.br/imovel/895632484/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>6</td><td class="n">R$ 7.255</td><td class="n dn">-6%</td><td class="n"><b>R$ 399.000</b></td><td class="n">55</td><td class="n">2</td><td class="n">1</td><td>4º–7º</td><td>Sem mobília</td><td class="n">R$ 482</td><td>há 1 mês</td><td>Piscina e academia no condomínio</td><td><a href="https://www.quintoandar.com.br/imovel/895695714/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>7</td><td class="n">R$ 7.463</td><td class="n dn">-3%</td><td class="n"><b>R$ 500.000</b></td><td class="n">67</td><td class="n">2</td><td class="n">1</td><td>8º–11º</td><td>Mobiliado</td><td class="n">R$ 748</td><td>há 2 meses</td><td>Mobiliado, 1 suíte, quintal e closet</td><td><a href="https://www.quintoandar.com.br/imovel/895576389/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>8</td><td class="n">R$ 7.673</td><td class="n dn">-1%</td><td class="n"><b>R$ 514.100</b></td><td class="n">67</td><td class="n">3</td><td class="n">1</td><td>3º</td><td>Sem mobília</td><td class="n">R$ 629</td><td>há +1 ano</td><td>3 quartos, aceita pets</td><td><a href="https://www.quintoandar.com.br/imovel/894877702/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>9</td><td class="n">R$ 7.679</td><td class="n dn">-1%</td><td class="n"><b>R$ 430.000</b></td><td class="n">56</td><td class="n">2</td><td class="n">1</td><td>12º–15º</td><td>Sem mobília</td><td class="n">R$ 632</td><td>há 6 meses</td><td>1 suíte, academia e piscina</td><td><a href="https://www.quintoandar.com.br/imovel/895327394/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>10</td><td class="n">R$ 7.727</td><td class="n dn">+0%</td><td class="n"><b>R$ 425.000</b></td><td class="n">55</td><td class="n">2</td><td class="n">1</td><td>8º–11º</td><td>Mobiliado</td><td class="n">R$ 480</td><td>há 1 mês</td><td>Mobiliado, com varanda</td><td><a href="https://www.quintoandar.com.br/imovel/895682174/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>11</td><td class="n">R$ 7.824</td><td class="n up">+1%</td><td class="n"><b>R$ 532.000</b></td><td class="n">68</td><td class="n">3</td><td class="n">1</td><td>8º–11º</td><td>Sem mobília</td><td class="n">R$ 600</td><td>há 8 meses</td><td>3 quartos</td><td><a href="https://www.quintoandar.com.br/imovel/895236847/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>12</td><td class="n">R$ 7.910</td><td class="n up">+2%</td><td class="n"><b>R$ 530.000</b></td><td class="n">67</td><td class="n">3</td><td class="n">1</td><td>8º–11º</td><td>Sem mobília</td><td class="n">R$ 483</td><td>há 6 meses</td><td>3 quartos, varanda</td><td><a href="https://www.quintoandar.com.br/imovel/893186382/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>13</td><td class="n">R$ 7.910</td><td class="n up">+2%</td><td class="n"><b>R$ 530.000</b></td><td class="n">67</td><td class="n">2</td><td class="n">1</td><td>4º–7º</td><td>Sem mobília</td><td class="n">R$ 630</td><td>há +1 ano</td><td>Varanda, churrasqueira</td><td><a href="https://www.quintoandar.com.br/imovel/894866129/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>14</td><td class="n">R$ 8.060</td><td class="n up">+4%</td><td class="n"><b>R$ 540.000</b></td><td class="n">67</td><td class="n">2</td><td class="n">1</td><td>8º–11º</td><td>Sem mobília</td><td class="n">R$ 580</td><td>há 1 mês</td><td>Vendido já alugado</td><td><a href="https://www.quintoandar.com.br/imovel/895652652/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>15</td><td class="n">R$ 8.209</td><td class="n up">+6%</td><td class="n"><b>R$ 550.000</b></td><td class="n">67</td><td class="n">2</td><td class="n">1</td><td>8º–11º</td><td>Mobiliado</td><td class="n">R$ 624</td><td>há 20 dias</td><td>Mobiliado, varanda · vendido já alugado</td><td><a href="https://www.quintoandar.com.br/imovel/895725770/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>16</td><td class="n">R$ 8.522</td><td class="n up">+10%</td><td class="n"><b>R$ 588.000</b></td><td class="n">69</td><td class="n">2</td><td class="n">2</td><td>16º–19º</td><td>Sem mobília</td><td class="n">R$ 648</td><td>há +1 ano</td><td>2 quartos, 1 suíte, 2 vagas, andar alto</td><td><a href="https://www.quintoandar.com.br/imovel/895088294/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>17</td><td class="n">R$ 9.091</td><td class="n up">+18%</td><td class="n"><b>R$ 500.000</b></td><td class="n">55</td><td class="n">2</td><td class="n">1</td><td>12º–15º</td><td>Sem mobília</td><td class="n">R$ 582</td><td>há 8 meses</td><td>1 suíte</td><td><a href="https://www.quintoandar.com.br/imovel/894198655/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class=""><td>18</td><td class="n">R$ 9.182</td><td class="n up">+19%</td><td class="n"><b>R$ 505.000</b></td><td class="n">55</td><td class="n">2</td><td class="n">1</td><td>4º–7º</td><td>Mobiliado</td><td class="n">n/d</td><td>há 2 meses</td><td>Mobiliado, 1 suíte, varanda c/ churrasqueira</td><td><a href="https://www.quintoandar.com.br/imovel/895605629/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+<tr class="mine"><td>19</td><td class="n">R$ 9.254</td><td class="n up">+20%</td><td class="n"><b>R$ 620.000</b></td><td class="n">67</td><td class="n">3</td><td class="n">2</td><td>16º–19º</td><td>Sem mobília</td><td class="n">R$ 494</td><td>há 11 meses</td><td>3 quartos, 1 suíte, 2 vagas, andar alto</td><td><a href="https://www.quintoandar.com.br/imovel/893375180/comprar" target="_blank" rel="noopener">Abrir ↗</a></td></tr>
+</tbody></table></div><p style="color:var(--mut);font-size:12px">Ordenado do menor para o maior R$/m². Seu imóvel destacado.</p></section>
+<section id="vc"><div class="sortb">Ordenar fotos por: <button class="on" data-s="p">Preço</button><button data-s="r">R$/m²</button></div>
+<div class="filters"><span style="color:var(--mut);font-size:13px">Filtrar:</span>
+<button class="on" data-f="all">Todos</button><button data-f="q3">3 quartos</button><button data-f="v2">2 vagas</button><button data-f="a67">67–69 m²</button><button data-f="a55">55–56 m²</button></div>
+<div class="grid" id="g">
+<article class="card" data-q="2" data-v="1" data-a="55" data-p="399000" data-r="7254.55">
+<div class="rank">1</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895695714-228.54594232157422IMG9153.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895695714-322.2388005024689IMG9154.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895695714-424.58560399520894IMG9155.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895695714-283.5772209356372IMG9156.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 399.000</div>
+<div class="ppm">R$ 7.255/m² <span class="diff dn">-6% vs mediana</span></div>
+<div class="bar"><span style="width:78%"></span></div>
+<div class="tit">Piscina e academia no condomínio</div>
+<ul class="spec"><li><b>55</b> m²</li><li><b>2</b> quartos</li><li><b>1</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>4º–7º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 482</span><span class="">Publicado há 1 mês</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895695714/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="2" data-v="1" data-a="55" data-p="425000" data-r="7727.27">
+<div class="rank">2</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895682174-557.4017483151825IMG6324.JPG" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895682174-702.9547771770075IMG6325.JPG" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895682174-854.2849500087414IMG6326.JPG" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895682174-566.4802280978812IMG6327.JPG" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 425.000</div>
+<div class="ppm">R$ 7.727/m² <span class="diff dn">+0% vs mediana</span></div>
+<div class="bar"><span style="width:84%"></span></div>
+<div class="tit">Mobiliado, com varanda</div>
+<ul class="spec"><li><b>55</b> m²</li><li><b>2</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>8º–11º</b></li><li>Mobiliado</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 480</span><span class="">Publicado há 1 mês</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895682174/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="2" data-v="1" data-a="56" data-p="430000" data-r="7678.57">
+<div class="rank">3</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895327394-70.68898467901718IMG9467.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895327394-578.2392091447547IMG9468.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895327394-400.1780514607841IMG9469.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895327394-798.0277320054233IMG9470.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 430.000</div>
+<div class="ppm">R$ 7.679/m² <span class="diff dn">-1% vs mediana</span></div>
+<div class="bar"><span style="width:83%"></span></div>
+<div class="tit">1 suíte, academia e piscina</div>
+<ul class="spec"><li><b>56</b> m²</li><li><b>2</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>12º–15º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 632</span><span class="old">Publicado há 6 meses</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895327394/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="3" data-v="1" data-a="69" data-p="480000" data-r="6956.52">
+<div class="rank">4</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894314890-762.1016710426451IMG4612.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894314890-827.791485592818IMG4613.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894314890-771.8522813756714IMG4614.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894314890-799.633493456295IMG4615.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 480.000</div>
+<div class="ppm">R$ 6.957/m² <span class="diff dn">-10% vs mediana</span></div>
+<div class="bar"><span style="width:75%"></span></div>
+<div class="tit">3 quartos, 1 suíte, varanda</div>
+<ul class="spec"><li><b>69</b> m²</li><li><b>3</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>8º–11º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 540</span><span class="old">Publicado há +1 ano</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/894314890/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="2" data-v="1" data-a="67" data-p="480000" data-r="7164.18">
+<div class="rank">5</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895261964-651.6903003533323IMG9133.JPG" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895261964-216.01615025980158IMG9134.JPG" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895261964-47.06595370943256IMG9135.JPG" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895261964-361.28643420521354IMG9136.JPG" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 480.000</div>
+<div class="ppm">R$ 7.164/m² <span class="diff dn">-7% vs mediana</span></div>
+<div class="bar"><span style="width:77%"></span></div>
+<div class="tit">Mobiliado, aceita pets</div>
+<ul class="spec"><li><b>67</b> m²</li><li><b>2</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>8º–11º</b></li><li>Mobiliado</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 455</span><span class="old">Publicado há 8 meses</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895261964/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="3" data-v="1" data-a="67" data-p="480000" data-r="7164.18">
+<div class="rank">6</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895742761-366.2294159079889IMG8188.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895742761-784.2275351099539IMG8189.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895742761-107.87770624978576IMG8190.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895742761-336.84466609677435IMG8191.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 480.000</div>
+<div class="ppm">R$ 7.164/m² <span class="diff dn">-7% vs mediana</span></div>
+<div class="bar"><span style="width:77%"></span></div>
+<div class="tit">3 quartos, aceita pets</div>
+<ul class="spec"><li><b>67</b> m²</li><li><b>3</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>3º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 565</span><span class="">Publicado há 10 dias</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895742761/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="2" data-v="1" data-a="68" data-p="489000" data-r="7191.18">
+<div class="rank">7</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895632484-372.7875348908251680fe4248-7e6d-425d-9284-4ebc96d5c674-LEAD3P-e5270f12-1cf7-4336-9ddb-11d4aaa61a82.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895632484-243.886802923794480fe4248-7e6d-425d-9284-4ebc96d5c674-LEAD3P-7c2cafd6-6714-424a-aac5-f1c0bf24d99c.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895632484-339.0139786255886680fe4248-7e6d-425d-9284-4ebc96d5c674-LEAD3P-4a39378a-a10a-40ec-aa8b-d0b72967f26d.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895632484-608.093006558518780fe4248-7e6d-425d-9284-4ebc96d5c674-LEAD3P-dde88081-610b-43f3-9059-b0dd9bde55d9.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 489.000</div>
+<div class="ppm">R$ 7.191/m² <span class="diff dn">-7% vs mediana</span></div>
+<div class="bar"><span style="width:78%"></span></div>
+<div class="tit">Mobiliado, com varanda</div>
+<ul class="spec"><li><b>68</b> m²</li><li><b>2</b> quartos</li><li><b>1</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>4º–7º</b></li><li>Mobiliado</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 580</span><span class="">Publicado há 1 mês</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895632484/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="2" data-v="1" data-a="67" data-p="500000" data-r="7462.69">
+<div class="rank">8</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895576389-753.634987088218898380b21-c19b-4dcd-a77d-6b30470b69eb-LEAD3P-f5380b4a-f6df-4275-ad00-6aabc4dc82a4.jpeg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895576389-234.4993511971157498380b21-c19b-4dcd-a77d-6b30470b69eb-LEAD3P-6a712382-92cf-4d3b-a7db-c4cb46ff1ee1.jpeg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895576389-33.02226012681297498380b21-c19b-4dcd-a77d-6b30470b69eb-LEAD3P-4c0b0d25-7029-4f8d-ac43-dd26b588df59.jpeg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895576389-363.2084869399152598380b21-c19b-4dcd-a77d-6b30470b69eb-LEAD3P-3ad7d3fb-4187-4aac-b1cd-d47536d7c52f.jpeg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 500.000</div>
+<div class="ppm">R$ 7.463/m² <span class="diff dn">-3% vs mediana</span></div>
+<div class="bar"><span style="width:81%"></span></div>
+<div class="tit">Mobiliado, 1 suíte, quintal e closet</div>
+<ul class="spec"><li><b>67</b> m²</li><li><b>2</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>8º–11º</b></li><li>Mobiliado</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 748</span><span class="">Publicado há 2 meses</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895576389/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="2" data-v="1" data-a="55" data-p="500000" data-r="9090.91">
+<div class="rank">9</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894198655-320.9681209379057IMG7895.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894198655-726.2523261986488IMG7894.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894198655-724.6252341882595IMG7896.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894198655-539.1368526462775IMG7897.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 500.000</div>
+<div class="ppm">R$ 9.091/m² <span class="diff up">+18% vs mediana</span></div>
+<div class="bar"><span style="width:98%"></span></div>
+<div class="tit">1 suíte</div>
+<ul class="spec"><li><b>55</b> m²</li><li><b>2</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>12º–15º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 582</span><span class="old">Publicado há 8 meses</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/894198655/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="2" data-v="1" data-a="55" data-p="505000" data-r="9181.82">
+<div class="rank">10</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895605629-247.62469419288223ffb3af0c-f2fc-4a11-9343-55c5ebb9f3f6-LEAD3P-491e3f11-c609-4837-a572-f65fbc1e92f9.jpeg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895605629-487.47476833065474ffb3af0c-f2fc-4a11-9343-55c5ebb9f3f6-LEAD3P-51afe02f-5809-4722-8515-21fffba6218a.jpeg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895605629-876.9853781285067ffb3af0c-f2fc-4a11-9343-55c5ebb9f3f6-LEAD3P-d2b3fb6e-e169-4437-bfc4-b452c740cc9e.jpeg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895605629-333.7625619058663ffb3af0c-f2fc-4a11-9343-55c5ebb9f3f6-LEAD3P-edbcacc0-56e4-4a56-ad93-a157352c9545.jpeg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 505.000</div>
+<div class="ppm">R$ 9.182/m² <span class="diff up">+19% vs mediana</span></div>
+<div class="bar"><span style="width:99%"></span></div>
+<div class="tit">Mobiliado, 1 suíte, varanda c/ churrasqueira</div>
+<ul class="spec"><li><b>55</b> m²</li><li><b>2</b> quartos</li><li><b>1</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>4º–7º</b></li><li>Mobiliado</li></ul>
+<div class="meta"><span>Cond.+IPTU: n/d</span><span class="">Publicado há 2 meses</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895605629/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="3" data-v="1" data-a="67" data-p="514100" data-r="7673.13">
+<div class="rank">11</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894877702-688.6928275777041286dc4b-503c-4ac2-baa3-787671f1236b-LEAD3P-96bb35c5-aa70-4f4d-9df3-ada73827e76f.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894877702-689.63221808340091286dc4b-503c-4ac2-baa3-787671f1236b-LEAD3P-79d50d6a-7ee2-48c8-a187-25b5bf9526bf.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894877702-151.81914825587141286dc4b-503c-4ac2-baa3-787671f1236b-LEAD3P-93be27d8-549d-4d03-9f23-9786f48e0e07.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894877702-837.71832158709921286dc4b-503c-4ac2-baa3-787671f1236b-LEAD3P-90d98f59-3715-4ec1-a465-229c1e55cb25.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 514.100</div>
+<div class="ppm">R$ 7.673/m² <span class="diff dn">-1% vs mediana</span></div>
+<div class="bar"><span style="width:83%"></span></div>
+<div class="tit">3 quartos, aceita pets</div>
+<ul class="spec"><li><b>67</b> m²</li><li><b>3</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>3º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 629</span><span class="old">Publicado há +1 ano</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/894877702/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="3" data-v="1" data-a="67" data-p="530000" data-r="7910.45">
+<div class="rank">12</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/893186382-322.0406677390907WhatsAppImage20201102at21.27.511.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/893186382-378.16486588970054WhatsAppImage20201102at21.27.51.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/893186382-951.3331826312672WhatsAppImage20201102at21.28.041.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/893186382-298.9800926196188WhatsAppImage20201102at21.28.04.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 530.000</div>
+<div class="ppm">R$ 7.910/m² <span class="diff up">+2% vs mediana</span></div>
+<div class="bar"><span style="width:85%"></span></div>
+<div class="tit">3 quartos, varanda</div>
+<ul class="spec"><li><b>67</b> m²</li><li><b>3</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>8º–11º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 483</span><span class="old">Publicado há 6 meses</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/893186382/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="2" data-v="1" data-a="67" data-p="530000" data-r="7910.45">
+<div class="rank">13</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894866129-259.515930998243MG0053.JPG" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894866129-765.8002616055302MG0051Editar.JPG" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894866129-870.0817271047454MG0052.JPG" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/894866129-64.34488277717098MG0040.JPG" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 530.000</div>
+<div class="ppm">R$ 7.910/m² <span class="diff up">+2% vs mediana</span></div>
+<div class="bar"><span style="width:85%"></span></div>
+<div class="tit">Varanda, churrasqueira</div>
+<ul class="spec"><li><b>67</b> m²</li><li><b>2</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>4º–7º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 630</span><span class="old">Publicado há +1 ano</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/894866129/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="3" data-v="1" data-a="68" data-p="532000" data-r="7823.53">
+<div class="rank">14</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895236847-804.1597295926238IMG6863.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895236847-586.3078699512419IMG6864.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895236847-417.4044386739018IMG6865.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895236847-928.769802742376IMG6866.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 532.000</div>
+<div class="ppm">R$ 7.824/m² <span class="diff up">+1% vs mediana</span></div>
+<div class="bar"><span style="width:85%"></span></div>
+<div class="tit">3 quartos</div>
+<ul class="spec"><li><b>68</b> m²</li><li><b>3</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>8º–11º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 600</span><span class="old">Publicado há 8 meses</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895236847/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="2" data-v="1" data-a="67" data-p="540000" data-r="8059.70">
+<div class="rank">15</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895652652-934.2924555695593IMG6962.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895652652-917.4414589962345IMG6963.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895652652-660.9570497997302IMG6964.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895652652-129.37261939247568IMG6965.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 540.000</div>
+<div class="ppm">R$ 8.060/m² <span class="diff up">+4% vs mediana</span></div>
+<div class="bar"><span style="width:87%"></span></div>
+<div class="tit">Vendido já alugado</div>
+<ul class="spec"><li><b>67</b> m²</li><li><b>2</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>8º–11º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 580</span><span class="">Publicado há 1 mês</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895652652/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="2" data-v="1" data-a="67" data-p="550000" data-r="8208.96">
+<div class="rank">16</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895725770-48.23393707259604IMG6479.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895725770-466.2902322210782IMG6481.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895725770-946.5498232793642IMG6482.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895725770-334.9903055598701IMG6483.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 550.000</div>
+<div class="ppm">R$ 8.209/m² <span class="diff up">+6% vs mediana</span></div>
+<div class="bar"><span style="width:89%"></span></div>
+<div class="tit">Mobiliado, varanda · vendido já alugado</div>
+<ul class="spec"><li><b>67</b> m²</li><li><b>2</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>8º–11º</b></li><li>Mobiliado</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 624</span><span class="">Publicado há 20 dias</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895725770/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="2" data-v="2" data-a="69" data-p="588000" data-r="8521.74">
+<div class="rank">17</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895088294-198.51616069496902IMG1267.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895088294-600.0747004650774IMG1266.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895088294-933.0718360069155IMG1268.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895088294-324.1968133996822IMG1269.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 588.000</div>
+<div class="ppm">R$ 8.522/m² <span class="diff up">+10% vs mediana</span></div>
+<div class="bar"><span style="width:92%"></span></div>
+<div class="tit">2 quartos, 1 suíte, 2 vagas, andar alto</div>
+<ul class="spec"><li><b>69</b> m²</li><li><b>2</b> quartos</li><li><b>2</b> banh.</li><li><b>2</b> vagas</li><li>Andar <b>16º–19º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 648</span><span class="old">Publicado há +1 ano</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895088294/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card mine" data-q="3" data-v="2" data-a="67" data-p="620000" data-r="9253.73">
+<div class="rank">18</div><div class="tag">SEU IMÓVEL</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/893375180-755.4881763255579DSC3869.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/893375180-360.09174368917184DSC3866.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/893375180-122.38304914387376DSC3867.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/893375180-762.99620807039DSC3868.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 620.000</div>
+<div class="ppm">R$ 9.254/m² <span class="diff up">+20% vs mediana</span></div>
+<div class="bar"><span style="width:100%"></span></div>
+<div class="tit">3 quartos, 1 suíte, 2 vagas, andar alto</div>
+<ul class="spec"><li><b>67</b> m²</li><li><b>3</b> quartos</li><li><b>2</b> banh.</li><li><b>2</b> vagas</li><li>Andar <b>16º–19º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 494</span><span class="old">Publicado há 11 meses</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/893375180/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+<article class="card" data-q="3" data-v="1" data-a="124" data-p="685000" data-r="5524.19">
+<div class="rank">19</div>
+<div class="gal"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895434355-47.347730204795326IMG7678.jpg" alt="Foto 1" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895434355-968.534049651098IMG7679.jpg" alt="Foto 2" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/original895434355-576.9178934110045IMG7680.jpg" alt="Foto 3" onclick="openLb(this.src)"><img loading="lazy" src="https://www.quintoandar.com.br/img/med/895434355-607.550609539133IMG7681.jpg" alt="Foto 4" onclick="openLb(this.src)"></div>
+<div class="body">
+<div class="price">R$ 685.000</div>
+<div class="ppm">R$ 5.524/m² <span class="diff dn">-29% vs mediana</span></div>
+<div class="bar"><span style="width:60%"></span></div>
+<div class="tit">124 m² · 3 quartos, 1 suíte (provável garden)</div>
+<ul class="spec"><li><b>124</b> m²</li><li><b>3</b> quartos</li><li><b>2</b> banh.</li><li><b>1</b> vaga</li><li>Andar <b>3º</b></li><li>Sem mobília</li></ul>
+<div class="meta"><span>Cond.+IPTU: R$ 817</span><span class="">Publicado há 4 meses</span></div>
+<a class="lnk" href="https://www.quintoandar.com.br/imovel/895434355/comprar" target="_blank" rel="noopener">Ver anúncio no QuintoAndar ↗</a>
+</div></article>
+</div>
+</section>
+<footer>Fonte: QuintoAndar, página do Condomínio Encontro Imigrantes, consultada em 06/10/2026. Os valores são de anúncio (preço pedido). "Cond.+IPTU" é o valor mensal exibido no card. As fotos carregam direto do QuintoAndar, então é preciso estar conectado à internet. Clique numa foto para ampliar.</footer>
+</div>
+<div id="lb" onclick="this.style.display='none'"><img alt=""></div>
+<script>
+function openLb(s){const l=document.getElementById('lb');l.querySelector('img').src=s.replace('/img/med/','/img/lrg/');l.style.display='flex'}
+document.querySelectorAll('.filters button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const f=b.dataset.f;
+document.querySelectorAll('.card').forEach(c=>{const q=+c.dataset.q,v=+c.dataset.v,a=+c.dataset.a;let ok=f=='all'||(f=='q3'&&q==3)||(f=='v2'&&v>=2)||(f=='a67'&&a>=66&&a<=69)||(f=='a55'&&a<=56);c.style.display=ok?'':'none'})});
+
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.getElementById('vc').style.display=b.dataset.t=='vc'?'':'none';document.getElementById('vt').style.display=b.dataset.t=='vt'?'block':'none'});
+document.querySelectorAll('.sortb button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.sortb button').forEach(x=>x.classList.remove('on'));b.classList.add('on');const g=document.getElementById('g');const k='data-'+b.dataset.s;[...g.children].sort((a,c)=>a.getAttribute(k)-c.getAttribute(k)).forEach((c,i)=>{g.appendChild(c);c.querySelector('.rank').textContent=i+1})});
+</script></body></html>
